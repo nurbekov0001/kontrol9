@@ -91,11 +91,9 @@ class PhotoCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'webapp.change_photo'
 
     def form_valid(self, form):
-        album = get_object_or_404(Album, pk=self.kwargs.get('pk'))
-        photo = form.save(commit=False)
-        photo.album = album
-        photo.author_photo = self.request.user
-        photo.save()
+        album = form.save(commit=False)
+        album.author_album = self.request.user
+        album.save()
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
