@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% block menu %}
+<li><a href="{% url "photo:photo_view" photo.pk %}">Вернуться к фотке</a></li>{% endblock menu %}
+{% block page_header %}Редактирвоать фото {{ photo.pk }}{% endblock page_header %} {% block content %}
+<form action="{% url "photo:photo_update" photo.pk %}" method="post">
+    {% include "partial/form.html" with button_text="Редактировать фото" %}
+</form>
+{% endblock content %}

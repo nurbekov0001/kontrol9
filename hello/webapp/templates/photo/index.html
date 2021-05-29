@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Photo list</h1><br/> {% if not photos %}
+<h2>НЕТ Фото</h2>
+{% else %} {% include "partial/search_form.html" %} {% endif %}
+{% include 'partial/photo_lists.html' %}
+{% include 'partial/paginate.html' %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% block title %}Подтвердите удаление проекта{% endblock %} {% block page_header %}
+    Вы уверены, что хотите удалить проект {{ album.name }}?{% endblock page_header %} {% block content%}
+<form action="{% url "photo:delete" album.pk %}", method="POST">
+    {% include 'partial/form.html' with button_text="Да, я хочу удалить этот проект" %}
+    <button> <a href="{% url "photo:view" album.pk %}">Отмена!</a> </button>
+</form>
+{% endblock content %}

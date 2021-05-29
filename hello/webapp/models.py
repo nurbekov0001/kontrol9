@@ -32,16 +32,16 @@ class Album(models.Model):
                               default='public', verbose_name="статус")
 
     class Meta:
-        db_table = "Album"
+        db_table = "Albums"
         verbose_name = "Альбом"
         verbose_name_plural = "Альбомы"
 
     def __str__(self):
-        return f'{self.name}, {self.description}, {self.created_at}, {self.author}, {self.choice}'
+        return f'{self.name}'
 
 class Chosen (models.Model):
     photo_id = models.ForeignKey('webapp.Photo', related_name='ChosenPhoto', verbose_name="Выбраное фото",
                                  on_delete=models.CASCADE)
     user_id = models.ForeignKey(get_user_model(), related_name='ChosenUser', verbose_name="Этот пользователь",
-                                on_delete=models.CASCADE)
+                                on_delete=models.CASCADE,)
 
