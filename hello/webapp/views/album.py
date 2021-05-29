@@ -20,6 +20,8 @@ class AlbumDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'album/delete.html'
     model = Album
     context_object_name = 'album'
+    permission_required = 'webapp.delete_album'
+
     success_url = reverse_lazy('photo:photo_list')
 
 
@@ -28,15 +30,19 @@ class AlbumUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'album/update.html'
     form_class = AlbumForm
     context_object_name = 'album'
+    permission_required = 'webapp.change_album'
+
 
     def get_success_url(self):
         return reverse('photo:view', kwargs={'pk': self.object.pk})
 
 
-class AlbumCreateView(LoginRequiredMixin, CreateView):
+class AlbumCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'album/create.html'
     model = Album
     form_class = AlbumForm
+    permission_required = 'webapp.add_album'
+
     context_object_name = 'photo'
 
     def form_valid(self, form):
