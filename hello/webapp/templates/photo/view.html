@@ -19,10 +19,10 @@
 
 {% endblock menu %} {% block page_header %}фото {{ photo.pk }}{% endblock page_header %} {% block content %}
 <p>  Подпись: {{ photo.signature }}</p>
-<p> Фото: {{ photo.the_photo}}</p>
+<p> Фото: <img src="{{photo.the_photo.url }}" alt="photo" height="250" width="250"></p>
 <p>start data: {{photo.created_at}}</p>
 <p>Автор: {{ photo.author}}</p>
-<p>Избранный {{ user_obj. }}</p>
+{#<p>Избранный {{ user_obj. }}</p>#}
 
 Users
     <br/>
