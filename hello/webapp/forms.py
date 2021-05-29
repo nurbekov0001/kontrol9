@@ -1,5 +1,6 @@
 from django import forms
-from webapp.models import Album, Photo
+from webapp.models import Album, Photo, Comment
+
 
 class PhotoForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,8 @@ class SearchForm(forms.Form):
 
 class PhotoDeleteForm(forms.Form):
     name = forms.CharField(max_length=100, required=True, label='Введите название задачи, чтобы удалить её')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment',)

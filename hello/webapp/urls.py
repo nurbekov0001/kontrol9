@@ -4,7 +4,7 @@ from webapp.views import (
     AlbumCreateView,
     AlbumDeleteView,
     AlbumUpdateView,
-    AlbumView,
+    AlbumView, PhotoCommentCreate,
 
 )
 
@@ -23,5 +23,7 @@ urlpatterns = [
     path('album/<int:pk>/', AlbumView.as_view(), name='view'),
     path('<int:pk>/album/update/', AlbumUpdateView.as_view(), name='update'),
     path('<int:pk>/album/delete/', AlbumDeleteView.as_view(), name='delete'),
+
+    path('<int:pk>/comments/add/', PhotoCommentCreate.as_view(), name='comment_create'),
 
 ]

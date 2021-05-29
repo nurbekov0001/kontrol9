@@ -64,6 +64,8 @@ class PhotoView(DetailView):
     context_object_name = 'photo'
 
 
+
+
 class PhotoUpdateView(PermissionRequiredMixin, UpdateView):
     model = Photo
     template_name = 'photo/update.html'

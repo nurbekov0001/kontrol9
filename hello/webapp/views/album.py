@@ -53,7 +53,6 @@ class AlbumCreateView(PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
     def get_success_url(self):
         return reverse('photos:album_view', kwargs={'pk': self.object.pk})
 

@@ -6,14 +6,12 @@
 {% if perms.webapp.delete_photo and request.user  %}
         <li><a href="{% url "photo:photo_delete" photo.pk %}">Удалить  фото </a></li>
 {% endif %}
+{% if perms.webapp.add_comment %}
+    <li><a href="{% url "photo:comment_create" photo.pk %}">Добавить Комментарий</a></li>
+{% endif %}
 
-{#{% if perms.webapp.add_tracer and request.user in photo.user.all %}#}
     <li><a href="{% url "photo:photo_add" %}"> Создание фото </a></li>
-{#{% endif %}#}
-{##}
-{#{% if perms.webapp.add_delete_change and request.user in project.user.all %}#}
-{#    <li><a href="{% url "photo:user_update" photo.pk %}"> Добавление пользователя </a></li>#}
-{#{% endif %}#}
+
 
 
 
@@ -22,21 +20,15 @@
 <p> Фото: <img src="{{photo.the_photo.url }}" alt="photo" height="250" width="250"></p>
 <p>start data: {{photo.created_at}}</p>
 <p>Автор: {{ photo.author}}</p>
-{#<p>Избранный {{ user_obj. }}</p>#}
+
 
 Users
     <br/>
     <br/>
+ {% for comment in comment_photo.CommentPhoto.all %}
+        <p>{{ comment.author }}: {{ comment.comment }} </p>
+    {% empty %}
+        <p>Нет комментариев :(</p>
+    {% endfor %}
 
-{#    {% for i in photo.user.all %}#}
-{#    <a href="{% url 'accounts:detail' i.pk %}">{{ i }} </a> </br>#}
-{#{% endfor %}#}
-
-
-{#<p>{% for task in project.tracers.all %} Название:#}
-{#    <a href="{% url 'photo:view' task.pk %}">{{ task.surname }}</a> <br/> Описание: {{ task.description }}#}
-{#    <br/> статус: {{ task.status }}#}
-{##}
-{#    <p>Tип: {% for type in task.type.all %}{{ type.name }} {% if not forloop.last %}, {% endif %}{% endfor %}</p>#}
-{#    <br/><br/> {% endfor %}#}
     <a href="{% url "photo:photo_list" %}">Главная страница</a> {% endblock %}

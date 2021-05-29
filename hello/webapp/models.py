@@ -45,3 +45,27 @@ class Chosen (models.Model):
     user_id = models.ForeignKey(get_user_model(), related_name='ChosenUser', verbose_name="Этот пользователь",
                                 on_delete=models.CASCADE,)
 
+
+class Comment(models.Model):
+    comment = models.TextField(null=False, blank=False, verbose_name='text')
+    comment_photo = models.ForeignKey("webapp.Photo", null=False, blank=False, related_name='CommentPhoto',
+                                      on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, blank=False,
+                               related_name='comment')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+
+    class Meta:
+        db_table = 'comments'
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+class Intermediate_table_of_cometaries_and_users(models.Model):
+    comment = models.ForeignKey('webapp.Comment', on_delete=models.CASCADE, null=True, related_name='like_comments')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, related_name='user_like_comments')
+
+    class Meta:
+        verbose_name = 'Лайк комента'
+        verbose_name_plural = 'Лайки коментариев'
+
+    def __str__(self):
+        return f'{self.user}: {self.comment}'
