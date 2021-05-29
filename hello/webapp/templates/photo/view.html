@@ -7,8 +7,8 @@
         <li><a href="{% url "photo:photo_delete" photo.pk %}">Удалить  фото </a></li>
 {% endif %}
 
-{#{% if perms.webapp.add_tracer and request.user in project.user.all %}#}
-{#    <li><a href="{% url "photo:project_tracer_add" project.id %}"> Создание фото </a></li>#}
+{#{% if perms.webapp.add_tracer and request.user in photo.user.all %}#}
+    <li><a href="{% url "photo:photo_add" %}"> Создание фото </a></li>
 {#{% endif %}#}
 {##}
 {#{% if perms.webapp.add_delete_change and request.user in project.user.all %}#}
@@ -22,11 +22,13 @@
 <p> Фото: {{ photo.the_photo}}</p>
 <p>start data: {{photo.created_at}}</p>
 <p>Автор: {{ photo.author}}</p>
+<p>Избранный {{ user_obj. }}</p>
 
 Users
     <br/>
     <br/>
-{#{% for i in photo.user.all %}#}
+
+{#    {% for i in photo.user.all %}#}
 {#    <a href="{% url 'accounts:detail' i.pk %}">{{ i }} </a> </br>#}
 {#{% endfor %}#}
 

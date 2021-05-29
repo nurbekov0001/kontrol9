@@ -19,15 +19,18 @@
     <nav class="navbar">
         <ul class="menu">
             <li><a href="{% url "photo:photo_list" %}">Все Фото</a></li>
-             <li><a href="{% url "photo:list" %}">Альбом</a></li>
-                {% if user.is_authenticated %}
-                    <li class="menu_right"><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Выйти</a></li>
-{#                    <li class="menu_right"><a href="{% url 'accounts:user-detail' user.id %}">Профиль</a></li>#}
-                {% else %}
-                    <li class="menu_right"><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Войти</a></li>
-{#                    <li class="menu_right"><a href="{% url 'accounts:register' %}?next={{ request.get_full_path }}">Зарегистрироваться</a></li>#}
-                {% endif %}
-            {% block menu %}{% endblock %}
+            <li><a href="{% url "photo:photo_add" %}">Создать фото </a></li>
+           <li><a href="{% url "photo:add" %}">Создать Альбом </a></li>
+                 {% if user.is_authenticated %} {% block menu_links %}{% endblock %}
+            <li class="menu-right"><a href="{% url 'accounts:logout' %}?next={{request.get_full_path}}"
+                                      class="nav-link">Выход</a></li>
+            <li class="menu-right">  Привет, <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>!</li>
+            {% else %}
+            <li class="menu-right"><a href="{% url 'accounts:login' %}?next={{request.get_full_path}}"
+                                      class="nav-link">Вход</a></li>
+                 <li class="menu-right"><a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}"
+                                           class="nav-link">Регистрация</a></li>
+            {% endif %}% endblock %}
         </ul>
     </nav>
 

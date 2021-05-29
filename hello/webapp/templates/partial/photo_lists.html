@@ -1,12 +1,14 @@
 {% for photo in photos %}
     <div class="box">
+    {% if user.is_authenticated %}
         <h3><a href="{% url "photo:photo_view" photo.pk %}">Описание: {{photo.signature }}</a></h3>
-             Описание: {{photo.the_photo }}<br/> Дата создания фото{ photo.created_at }}<br/>
-{#            {% if photo  %}#}
-                <a href="{% url "photo:list"%}">Альбом  {{ photo.album }}</a>
+             Описание: <img src="{{photo.the_photo.url }}" alt="photo" height="250" width="250"><br/>
+        Дата создания фото{{ photo.created_at }}<br/>
+
+            {% endif %}
         <br/><br/>
     </div>
-
+    <h1>Зарегистрируйтесь</h1>
 {% empty %}
     <h2 class="text-center">Нет проектов </h2>
 {% endfor %}

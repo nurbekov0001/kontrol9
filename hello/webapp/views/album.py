@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,14 +22,6 @@ class AlbumDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'album'
     success_url = reverse_lazy('photo:photo_list')
 
-class AlbumCreateView(PermissionRequiredMixin, CreateView):
-
-    template_name = 'album/create.html'
-    model = Album
-    form_class = AlbumForm
-
-    def get_success_url(self):
-        return reverse('album:album_view', kwargs={'pk': self.object.pk})
 
 class AlbumUpdateView(PermissionRequiredMixin, UpdateView):
     model = Album
@@ -41,4 +33,17 @@ class AlbumUpdateView(PermissionRequiredMixin, UpdateView):
         return reverse('photo:view', kwargs={'pk': self.object.pk})
 
 
+class AlbumCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'album/create.html'
+    model = Album
+    form_class = AlbumForm
+
+    def form_valid(self, form):
+        album = form.save(commit=False)
+        album.author_album = self.request.user
+        album.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('photos:album_view', kwargs={'pk': self.object.pk})
 

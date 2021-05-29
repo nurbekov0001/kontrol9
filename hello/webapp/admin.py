@@ -14,7 +14,7 @@ class AlbumsAdmin(admin.ModelAdmin):
     fields = ['name', 'description', 'author', 'choice']
 
 class ChosenAdmin(admin.ModelAdmin):
-    list_display = ['id', 'photo_id', 'user_id']
+    list_display = ['id', 'photo_id']
 
 
 admin.site.register(Photo, PhotosAdmin)

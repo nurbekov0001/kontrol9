@@ -40,13 +40,6 @@ class PhotoIndexView(ListView):
             return self.form.cleaned_data['search_value']
         return None
 
-    # def form_valid(self, form):
-    #     album = get_object_or_404(Album, id=self.kwargs.get('pk'))
-    #     photo = form.save(commit=False)
-    #     photo.album = album
-    #     photo.author = self.request.user
-    #     photo.save()
-    #     return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,7 +48,12 @@ class PhotoIndexView(ListView):
         # print(context)
         if self.search_data:
             context['query'] = urlencode({'search_value': self.search_data})
-
+        photo = Photo.objects.all()
+        if self.request.user.groups.filter(name='Moderator').exists():
+            context['reviews'] = photo
+            return context
+        else:
+            context['reviews'] = photo.filter(choice='public')
         return context
 
 
@@ -85,22 +83,25 @@ class PhotoDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'webapp.delete_photo'
     success_url = reverse_lazy('photo:photo_list')
 
-class PhotoCreateView(PermissionRequiredMixin, CreateView):
 
-    template_name = 'photo/create.html'
+class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
+    template_name = 'photo/create.html'
     form_class = PhotoForm
-    permission_required = 'webapp.add_photo'
+
+    def form_valid(self, form):
+        album = get_object_or_404(Album, pk=self.kwargs.get('pk'))
+        photo = form.save(commit=False)
+        photo.album = album
+        photo.author_photo = self.request.user
+        photo.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
     def get_success_url(self):
         return reverse('photo:photo_view', kwargs={'pk': self.object.pk})
-
-    def form_valid(self, form):
-        album = get_object_or_404(Album, id=self.kwargs.get('pk'))
-        photo = form.save(commit=False)
-        photo.album = album
-        photo.author = self.request.user
-        photo.save()
-        return super().form_valid(form)
 
 
