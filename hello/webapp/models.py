@@ -20,15 +20,28 @@ class Photo(models.Model):
         verbose_name_plural = "Фотки"
 
     def __str__(self):
-        return f'{self.the_photo}, {self.signature}, {self.created_at}, {self.author}, {self.choice}'
+        return f'{self.the_photo}, {self.signature}, {self.created_at}, {self.author}, {self.choice}, {self.album}'
 
 class Album(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100, verbose_name="название")
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='описание')
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, related_name='album')
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False, blank=False,
+                               related_name='album')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     choice = models.CharField(max_length=20, choices=STATUS_CHOICES, null=False, blank=False,
                               default='public', verbose_name="статус")
 
+    class Meta:
+        db_table = "Album"
+        verbose_name = "Альбом"
+        verbose_name_plural = "Альбомы"
 
+    def __str__(self):
+        return f'{self.name}, {self.description}, {self.created_at}, {self.author}, {self.choice}'
+
+class Chosen (models.Model):
+    photo_id = models.ForeignKey('webapp.Photo', related_name='ChosenPhoto', verbose_name="Выбраное фото",
+                                 on_delete=models.CASCADE)
+    user_id = models.ForeignKey(get_user_model(), related_name='ChosenUser', verbose_name="Этот пользователь",
+                                on_delete=models.CASCADE)
 
