@@ -1,0 +1,132 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Moderator",
+    "permissions": [
+      [
+        "change_album",
+        "webapp",
+        "album"
+      ],
+      [
+        "delete_album",
+        "webapp",
+        "album"
+      ],
+      [
+        "view_album",
+        "webapp",
+        "album"
+      ],
+      [
+        "change_chosen",
+        "webapp",
+        "chosen"
+      ],
+      [
+        "delete_chosen",
+        "webapp",
+        "chosen"
+      ],
+      [
+        "view_chosen",
+        "webapp",
+        "chosen"
+      ],
+      [
+        "change_photo",
+        "webapp",
+        "photo"
+      ],
+      [
+        "delete_photo",
+        "webapp",
+        "photo"
+      ],
+      [
+        "view_photo",
+        "webapp",
+        "photo"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$e6yQpLUNAEUZO0juwL9SqL$CWPUTFWOAasIxNvru1F+UMUm8/ob51AN0eOf5fR2gcs=",
+    "last_login": "2021-05-29T12:17:06.489Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2021-05-29T07:52:41.945Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$CdRN8OWzVuz77Xfr9ylI8w$7tAaKvn3S90Yx/BzNQKbcn2Pz8QH0Iitfn7pirpHl8E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "lead",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-05-29T11:32:43Z",
+    "groups": [
+      [
+        "Moderator"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$IvWi2jmKU3s3MGxOrevy6t$VEBWDSc6sAbK3K1lPQPFFizFVU8nRjurKiUrW0ZM5p8=",
+    "last_login": "2021-05-29T11:54:10.043Z",
+    "is_superuser": false,
+    "username": "beka",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-05-29T11:54:09.523Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$F0ZLxL6EU9zZBMLS7a0LAx$ap5xkUhPemme5p9lEyOFXYrRCV6mVWc6m1yjJMYwMQs=",
+    "last_login": "2021-05-29T12:14:51.182Z",
+    "is_superuser": false,
+    "username": "bekas",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-05-29T12:14:50.604Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
