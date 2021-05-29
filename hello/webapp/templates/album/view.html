@@ -18,10 +18,11 @@
 
 
 {% endblock menu %} {% block page_header %}фото {{ photo.pk }}{% endblock page_header %} {% block content %}
-<p>  Подпись: {{ photo.signature }}</p>
-<p> Фото: {{ photo.the_photo}}</p>
+<p>  Подпись: {{ photo.name }}</p>
+<p> Фото: {{ photo.description}}</p>
 <p>start data: {{photo.created_at}}</p>
 <p>Автор: {{ photo.author}}</p>
+    <p>choice{{ photo.choice }}</p>
 
 Users
     <br/>

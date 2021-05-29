@@ -84,10 +84,11 @@ class PhotoDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('photo:photo_list')
 
 
-class PhotoCreateView(LoginRequiredMixin, CreateView):
+class PhotoCreateView(PermissionRequiredMixin, CreateView):
     model = Photo
     template_name = 'photo/create.html'
     form_class = PhotoForm
+    permission_required = 'webapp.change_photo'
 
     def form_valid(self, form):
         album = get_object_or_404(Album, pk=self.kwargs.get('pk'))

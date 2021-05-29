@@ -37,6 +37,7 @@ class AlbumCreateView(LoginRequiredMixin, CreateView):
     template_name = 'album/create.html'
     model = Album
     form_class = AlbumForm
+    context_object_name = 'photo'
 
     def form_valid(self, form):
         album = form.save(commit=False)
